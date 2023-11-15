@@ -1,6 +1,5 @@
 use std::cmp::max;
 
-
 pub struct Solution {}
 
 impl Solution {
@@ -8,32 +7,22 @@ impl Solution {
         
         let mut stack = Vec::<usize>::with_capacity(height.len());
         let mut sum = 0;
-        let mut peak = height[0];
-        let mut before_climbing = true;
 
         for i in 0 .. height.len() {
+            let mut max_distance = 0;
+
             while let Some(stack_index) = stack.iter().last() {
-                if height[i] <= height[*stack_index] {
-                    if height[*stack_index] > height[i] && before_climbing {
-                        peak = height[*stack_index];
-                        before_climbing = false;
-                    }
-                    
+                if height[i] < height[*stack_index] {
                     break;
                 }
+                
+                max_distance = max(max_distance, i as i32 - *stack_index as i32 - 1);
 
-                while let Some(lower_index) = stack.iter().last() {
-                    if height[*lower_index] < peak {
-                        sum += peak - height[*lower_index];
-                    }
-                    
-                    stack.pop();
-                }
-
-                before_climbing = true;
-
+                stack.pop();
             }
 
+            sum += max_distance;
+            
             stack.push(i);
         }
 
