@@ -4,39 +4,33 @@ pub struct Solution {}
 
 impl Solution {
     pub fn trap(height: Vec<i32>) -> i32 { 
-        let mut stack = Vec::<usize>::with_capacity(height.len());
-        let mut sum = 0;
+        let left:Vec<i32> = height.iter()
+            .enumerate()
+            .fold(vec![0; height.len()], |mut acc, (index, h)| {
+                acc[index] = match index {
+                    0 => *h,
+                    _=> max(acc[index - 1], *h)
+                };
+                acc
+            });
 
-        for i in 0 .. height.len() {
-            let mut max_area = 0;
-
-            while let Some(last_index) = stack.iter().last() {
-                if height[i] <= height[*last_index] {
-                    break;
-                }
-
-                let right_height = height[i];
-
-                let current_index = stack.pop().unwrap();
-
-                let left_index = stack
-                    .last()
-                    .cloned()
-                    .or(Some(current_index)).unwrap();
-
-                let distance = i as i32 - current_index as i32;
-               
-                let current_height = height[i] - min(right_height, height[left_index]);
-
-                max_area = max(max_area, distance * current_height);
-            }
-
-            sum += max_area;
-            
-            stack.push(i);
-        }
-
-        sum
+        let right:Vec<i32> = height.iter()
+            .enumerate()
+            .rev()
+            .fold(vec![0; height.len()], |mut acc, (index, h)| {
+                acc[index] = match index {
+                    _ if index == height.len() - 1 => *h,
+                    _=> max(acc[index + 1], *h)
+                };
+                acc
+            });
+    
+        
+        height.iter().enumerate()
+            .fold(0, |water, (index, current_height)| {
+                let boder_height = min(left[index], right[index]);
+                water + boder_height - current_height
+            })
     }
 
 }
