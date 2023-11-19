@@ -1,27 +1,37 @@
-use std::cmp::max;
+use std::cmp::{max, min};
 
 pub struct Solution {}
 
 impl Solution {
-    pub fn trap(height: Vec<i32>) -> i32 {
-        
+    pub fn trap(height: Vec<i32>) -> i32 { 
         let mut stack = Vec::<usize>::with_capacity(height.len());
         let mut sum = 0;
 
         for i in 0 .. height.len() {
-            let mut max_distance = 0;
+            let mut max_area = 0;
 
-            while let Some(stack_index) = stack.iter().last() {
-                if height[i] < height[*stack_index] {
+            while let Some(last_index) = stack.iter().last() {
+                if height[i] <= height[*last_index] {
                     break;
                 }
-                
-                max_distance = max(max_distance, i as i32 - *stack_index as i32 - 1);
 
-                stack.pop();
+                let right_height = height[i];
+
+                let current_index = stack.pop().unwrap();
+
+                let left_index = stack
+                    .last()
+                    .cloned()
+                    .or(Some(current_index)).unwrap();
+
+                let distance = i as i32 - current_index as i32;
+               
+                let current_height = height[i] - min(right_height, height[left_index]);
+
+                max_area = max(max_area, distance * current_height);
             }
 
-            sum += max_distance;
+            sum += max_area;
             
             stack.push(i);
         }
@@ -84,4 +94,10 @@ mod tests {
         assert_eq!(6, Solution::trap(height_map));
     }
 
+    #[test]
+    pub fn test_trap_highter_tran_steep() {
+        let height_map = vec![4,2,0,3,2,5];
+
+        assert_eq!(9, Solution::trap(height_map));
+    }
 }
