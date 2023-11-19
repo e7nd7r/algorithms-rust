@@ -2,54 +2,22 @@ use std::cmp::{min, max};
 
 struct Solution;
 
-/*
-    
-    [1,8,6,2,5,4,8,3,7]
-    [1,1,8,8,8,8,8,8,8]
-    [1,]
-*/
 impl Solution {
     #[allow(dead_code)]
     pub fn max_area(height: Vec<i32>) -> i32 {
         let mut max_area = 0;
-        let mut left_max:Vec<usize> = vec![0; height.len()];
-        let mut right_max:Vec<usize> = vec![0; height.len()];
+        let mut left = 0;
+        let mut right = height.len() - 1;
 
-        left_max[0] = 0;
-        right_max[height.len() - 1] = height.len() - 1;
+        while left < right  {
+            max_area =  max(max_area, min(height[left], height[right]) * (right - left) as i32);
 
-        for i in 1 .. height.len()  {
-            let left_max_index = left_max[i - 1];
-            left_max[i] = if height[i] > height[left_max_index as usize] {
-                i
-            } else 
-            {
-                left_max_index
-            };
-
-            let j = height.len() - i - 1;
-            let right_max_index = right_max[j + 1];
-            
-            right_max[j] = if height[j] > height[right_max_index as usize] {
-                j
+            if height[left] < height[right] {
+                left += 1;
             } else {
-                right_max_index
+                right -= 1;
             }
         }
-
-
-        for i in 0 .. height.len() {
-            let left = left_max[i];
-            let right = right_max[i];
-
-            let distance = (right - left) as i32;
-            let height = min(height[left], height[right]);
-
-            max_area = max(max_area, distance * height);
-        }
-
-        println!("{:?}", left_max);
-        println!("{:?}", right_max);
 
         max_area
     }
@@ -114,6 +82,6 @@ mod tests {
         let heights = vec![1,2,1];
         let area = Solution::max_area(heights);
 
-        assert_eq!(area, 1)
+        assert_eq!(area, 2)
     }
 }
