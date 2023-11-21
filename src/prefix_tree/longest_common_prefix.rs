@@ -1,14 +1,14 @@
-use std::{collections::HashSet};
+use std::collections::HashSet;
 
-
+#[allow(dead_code)]
 struct Solution {}
 
 impl Solution {
-    pub fn longest_common_prefix(strs: Vec<String>) -> String {    
-        strs
-            .iter()
+    #[allow(dead_code)]
+    pub fn longest_common_prefix(strs: Vec<String>) -> String {
+        strs.iter()
             .map(|str| -> HashSet<_> {
-                (0 .. str.len())
+                (0..str.len())
                     .map(|l| -> String { str.chars().take(l + 1).collect() })
                     .collect()
             })
@@ -25,51 +25,19 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use std::collections::HashSet;
-
     use crate::prefix_tree::longest_common_prefix::Solution;
 
     #[test]
     fn test_longest_common_prefix() {
-        let strs = vec![
-            "a".to_owned(),
-            "ab".to_owned(),
-        ];
+        let strs = vec!["a".to_owned(), "ab".to_owned()];
 
         assert_eq!("a".to_owned(), Solution::longest_common_prefix(strs))
     }
 
     #[test]
     fn test_longest_common_prefix2() {
-        let strs = vec![
-            "a".to_owned(),
-            "ab".to_owned(),
-        ];
-
-        let a:Vec<_> = strs
-            .iter()
-            .map(|str| -> HashSet<_> {
-                (0 .. str.len())
-                    .map(|l| -> String { str.chars().take(l + 1).collect() })
-                    .collect()
-            })
-            .collect();
+        let strs = vec!["a".to_owned(), "ab".to_owned()];
 
         assert_eq!("a".to_owned(), Solution::longest_common_prefix(strs))
-    }
-
-    #[test]
-    fn test_reduce() {
-        let v = vec![
-            HashSet::from(["a".to_owned()]),
-            HashSet::from(["".to_owned()])
-        ];
-        
-        let a = v.iter()
-        .cloned()
-        .reduce(|a, b| {
-            a.intersection(&b).cloned().collect()
-        }).unwrap();
-        println!("{:?}", a);
     }
 }

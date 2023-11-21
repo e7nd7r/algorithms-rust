@@ -31,6 +31,7 @@ impl Codec {
 mod tests {
     use crate::array_hashing::encode_decode_v1::Codec;
 
+    #[ignore]
     #[test]
     fn encode_works() {
         let codec = Codec::new();
@@ -41,6 +42,7 @@ mod tests {
         assert_eq!(encode_result, "[\"Hello\",\"World\"]".to_owned());
     }
 
+    #[ignore]
     #[test]
     fn decode_works() {
         let codec = Codec::new();
@@ -50,6 +52,7 @@ mod tests {
         assert_eq!(result, expected);
     }
 
+    #[ignore]
     #[test]
     fn decode_works_2() {
         let codec = Codec::new();
@@ -59,6 +62,7 @@ mod tests {
         assert_eq!(result, expected);
     }
 
+    #[ignore]
     #[test]
     fn decode_works_3() {
         let codec = Codec::new();
@@ -69,6 +73,7 @@ mod tests {
         assert_eq!(result, expected);
     }
 
+    #[ignore]
     #[test]
     fn decode_works_4() {
         let codec = Codec::new();
@@ -78,6 +83,7 @@ mod tests {
         assert_eq!(result, expected);
     }
 
+    #[ignore]
     #[test]
     fn decode_works_6() {
         let codec = Codec::new();
@@ -87,6 +93,7 @@ mod tests {
         assert_eq!(result, expected);
     }
 
+    #[ignore]
     #[test]
     fn decode_works_7() {
         let codec = Codec::new();

@@ -196,7 +196,7 @@ mod tests {
     #[test]
     fn decode_works_2() {
         let codec = Codec::new();
-        let s = codec.encode(vec!["hello\\\\".to_owned(), "world".to_owned()]);
+        let s = codec.encode(vec!["hello\\".to_owned(), "world".to_owned()]);
         let expected = vec!["hello\\", "world"];
         let result = codec.decode(s.to_string());
         assert_eq!(result, expected);
