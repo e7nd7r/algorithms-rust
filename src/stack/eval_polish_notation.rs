@@ -1,8 +1,7 @@
-use std::result;
-
 struct Solution {}
 
 impl Solution {
+    #[allow(dead_code)]
     pub fn eval_rpn(tokens: Vec<String>) -> i32 {
         let mut s:Vec<i32> = Vec::with_capacity(tokens.len() / 2);
         let mut iter = tokens.iter().cloned();
