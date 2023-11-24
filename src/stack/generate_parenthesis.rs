@@ -1,35 +1,41 @@
 /*
     ((()))","(()())","(())()","()(())","()()()
  */
-
-use std::collections::HashSet;
-
 struct Solution {}
 
 impl Solution {
 
     #[allow(dead_code)]
     pub fn generate_parenthesis(n: i32) -> Vec<String> {
+        fn generate(ans: &mut Vec<String>, current_str: &mut String, n: i32) {                
+            let left_count: usize = current_str
+                .chars()
+                .fold(0, |s, c| s + (c == '(') as usize);
+            let right_count = current_str.len() - left_count;
 
-        if n == 1 {
-            return vec!["()".to_owned()];
-        }
-    
-        let current_result = &Solution::generate_parenthesis(n - 1);
-
-        let mut result = HashSet::new();
-      
-        for n_result in current_result {
-            let inner = format!("({})", n_result);
-            let left = format!("(){}", n_result);
-            let right = format!("{}()", n_result);
+            if right_count == n as usize {
+                ans.push(current_str.clone());
+                return ();
+            } 
             
-            result.insert(inner);
-            result.insert(left);
-            result.insert(right);
+            if left_count < n as usize {
+                current_str.push('(');
+                generate(ans, current_str, n);
+                current_str.pop();
+            }
+
+            if left_count > right_count as usize {
+                current_str.push(')');
+                generate(ans, current_str, n);
+                current_str.pop();
+            }
         }
 
-        result.iter().cloned().collect()
+        let ans = &mut Vec::new();
+
+        generate(ans, &mut "(".to_string(), n);
+
+        ans.to_vec()
     }
 }
 
