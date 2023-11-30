@@ -6,7 +6,7 @@ impl Solution {
         let mut res : Vec<i32> = vec![0; temperatures.len()];
 
         for (index,temp) in temperatures.iter().enumerate() {
-                while let Some(last_temp_index) = stack.last(){
+                while let Some(last_temp_index) = stack.last() {
                     if *temp > temperatures[*last_temp_index] {
                         res[*last_temp_index] = (index - *last_temp_index) as i32;
                         stack.pop();
