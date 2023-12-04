@@ -22,7 +22,6 @@ impl Solution {
             } else {
                 left = mid as i32 + 1;
             }
-
         }
 
         return false;
