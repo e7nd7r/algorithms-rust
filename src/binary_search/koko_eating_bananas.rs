@@ -57,4 +57,29 @@ mod tests {
     fn test_min_eating_speed04() {
         assert_eq!(Solution::min_eating_speed(vec![1000000000], 2), 500000000);
     }
+
+    #[test]
+    fn test_floating_point_ceil() {
+        /*
+            The following value is interpreted as 2 but it has a reminding of 28, therefore it's ceil value it's incorrect.
+            This precission issues can happen using floting point values so for this case it's better to use this formula
+
+            *pile / k + (pile % k != 0) as i32;
+
+            Notice that the number doesn't have the sign bit so there is only 31 bits.
+
+            1000000000/499999986 = [2, 1000000000000000000000000000000] ~ 2
+
+            The following tool it's interesting to understand floating point.
+            https://evanw.github.io/float-toy/
+        */
+        let piles = vec![1000000000];
+        let k = 500000000;
+        for pile in piles {
+            let  actual = pile as f32 / k as f32;
+            let ceil_val = ((pile as f32 / k as f32)).ceil();
+
+            println!("{}/{} = [{}, {:b}] ~ {}", pile, k, actual, actual.to_bits(), ceil_val);
+        }
+    }
 }
