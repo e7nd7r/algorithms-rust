@@ -22,7 +22,7 @@ impl MinStack {
 
         let new_value = match last_value {
             None => (val, val),
-            Some((v, min)) if val > *min => (val, *min),
+            Some((_, min)) if val > *min => (val, *min),
             _ => (val, val)
         };
 
