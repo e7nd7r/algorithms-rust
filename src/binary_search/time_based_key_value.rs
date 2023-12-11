@@ -4,7 +4,6 @@ struct TimeMap {
     inner:  HashMap<String, Vec<(i32, String)>>
 }
 
-
 /** 
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
