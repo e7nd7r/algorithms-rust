@@ -33,7 +33,7 @@ impl Solution {
     pub fn reorder_list(head: &mut Option<Box<ListNode>>) {
         let mut stack = Vec::with_capacity(10);
         
-        let mut curr: Option<Box<ListNode>> = head.take();
+        let mut curr = head.take();
 
         while let Some(mut node) = curr {
             curr = node.next.take();
