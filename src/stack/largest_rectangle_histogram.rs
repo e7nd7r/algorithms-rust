@@ -20,8 +20,11 @@ impl Solution {
                 s.pop();
 
                 let left = s.last().map(|x| *x as i32).unwrap_or(-1);
+                let a = (index as i32 - left - 1) * height;
 
-                max_area = max(max_area, (index as i32 - left - 1) * height);
+                println!("area: {}", a);
+
+                max_area = max(max_area, a);
             }
 
             s.push(index)

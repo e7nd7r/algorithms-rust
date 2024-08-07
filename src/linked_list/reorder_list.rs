@@ -1,7 +1,5 @@
 // Definition for singly-linked list.
 
-use std::{ops::Deref, hint::unreachable_unchecked};
-
 pub struct Solution;
 
 #[derive(PartialEq, Eq, Clone, Debug)]
@@ -11,6 +9,7 @@ pub struct ListNode {
 }
 
 impl ListNode {
+    #[allow(dead_code)]
     #[inline]
     fn new(val: i32) -> Self {
         ListNode { next: None, val }
