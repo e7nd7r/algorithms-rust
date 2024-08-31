@@ -7,3 +7,7 @@ pub mod copy_with_random_pointer;
 pub mod add_two_numbers;
 pub mod list_has_cycle;
 pub mod find_duplicate;
+pub mod lru_cache;
+pub mod merge_k_sorted_lists_01;
+pub mod merge_k_sorted_lists_02;
+pub mod reverse_linked_list_k_group;

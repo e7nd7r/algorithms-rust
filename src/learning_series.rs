@@ -1,0 +1,11 @@
+pub mod serie1_ownership;
+pub mod serie2_composition_traits;
+pub mod serie2_midi_player;
+pub mod serie2_clinical_record;
+pub mod serie2_audio_effect_chain_builder;
+pub mod serie2_trait_mock;
+pub mod serie2_strategy_pattern;
+pub mod serie2_decorator;
+pub mod serie2_decorator_macro;
+pub mod serie2_state_pattern;
+pub mod serie2_singlenton;
